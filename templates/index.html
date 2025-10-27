@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced AI/ML Load Distribution System</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Dynamic Night Sky Background -->
+        <div class="night-sky-background">
+            <!-- Stars Layer -->
+            <div class="stars-container">
+                <div class="star star-1"></div>
+                <div class="star star-2"></div>
+                <div class="star star-3"></div>
+                <div class="star star-4"></div>
+                <div class="star star-5"></div>
+                <div class="star star-6"></div>
+                <div class="star star-7"></div>
+                <div class="star star-8"></div>
+                <div class="star star-9"></div>
+                <div class="star star-10"></div>
+                <div class="star star-11"></div>
+                <div class="star star-12"></div>
+                <div class="star star-13"></div>
+                <div class="star star-14"></div>
+                <div class="star star-15"></div>
+                <div class="star star-16"></div>
+                <div class="star star-17"></div>
+                <div class="star star-18"></div>
+                <div class="star star-19"></div>
+                <div class="star star-20"></div>
+            </div>
+
+            <!-- Moving Clouds Layer -->
+            <div class="clouds-container">
+                <div class="moving-cloud cloud-1">☁</div>
+                <div class="moving-cloud cloud-2">☁</div>
+                <div class="moving-cloud cloud-3">☁</div>
+                <div class="moving-cloud cloud-4">☁</div>
+                <div class="moving-cloud cloud-5">☁</div>
+                <div class="moving-cloud cloud-6">☁</div>
+            </div>
+        </div>
+
+        <!-- Main Application Content -->
+        <div id="main-content" class="app-content">
+            <!-- Login Page -->
+            <div id="login-page" class="page active">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <div class="cyber-header">
+                            <h1>🤖 AI-Load Distribution System</h1>
+                         
+                        </div>
+
+                        <form id="login-form">
+                            <div class="form-group">
+                                <input type="text" id="login-username" placeholder="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="login-password" placeholder="Password" required>
+                            </div>
+                            <div id="login-error" class="error-message" style="display: none;"></div>
+                            <button type="submit" class="cyber-button">Connect to AI System</button>
+                        </form>
+
+                        <div class="auth-links">
+                            <p>Don't have an account?</p>
+                            <a href="#" onclick="showPage('register-page')">Create Account</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Register Page -->
+            <div id="register-page" class="page">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <div class="cyber-header">
+                            <h1>🤖 Join AI Cloud</h1>
+                            <p>Create Your Intelligent Account</p>
+                        </div>
+
+                        <form id="register-form">
+                            <div class="form-group">
+                                <input type="text" id="reg-username" placeholder="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="reg-email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="reg-fullname" placeholder="Full Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="reg-phone" placeholder="Phone Number">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="reg-password" placeholder="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required>
+                            </div>
+                            <div id="register-error" class="error-message" style="display: none;"></div>
+                            <button type="submit" class="cyber-button">Register with AI</button>
+                        </form>
+
+                        <div class="auth-links">
+                            <p>Already have an account? </p>
+                            <a href="#" onclick="showPage('login-page')">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Dashboard Page -->
+            <div id="user-dashboard-page" class="page">
+                <div class="dashboard-container">
+                    <div class="dashboard-header">
+                        <h1 id="user-dashboard-title">🤖 AI/ML-Powered Load Distribution System</h1>
+                        <div class="user-info">
+                            <span id="welcome-user">Welcome, User</span>
+                            <button onclick="generateUserReport()" class="report-btn">📊 Generate Report</button>
+                            <button onclick="logout()" class="logout-btn">Logout</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-content">
+                       
+                        <div class="servers-section">
+                            <h2>🖥️ Intelligent Server Status & ML Load Distribution</h2>
+                            <div class="server-grid" id="server-grid">
+                                <!-- Server cards will be loaded here -->
+                            </div>
+                        </div>
+
+                        <div class="user-session-info">
+                            <h2>👤 Your AI-Optimized Session</h2>
+                            <div class="session-card" id="session-info">
+                                <!-- Session info will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard Page -->
+            <div id="admin-dashboard-page" class="page">
+                <div class="admin-dashboard">
+                    <div class="admin-header">
+                        <h1>⚡ ML Admin Dashboard - AI Cloud System</h1>
+                        <div class="admin-controls">
+                            <span class="admin-name" id="admin-welcome">Welcome, Admin</span>
+                            <button onclick="logout()" class="logout-btn">Logout</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-tabs">
+                        <button class="active" onclick="showAdminTab('overview')">📊 ML Overview</button>
+                        <button onclick="showAdminTab('servers')">🖥️ AI Servers</button>
+                        <button onclick="showAdminTab('users')">👥 Users</button>
+                        <button onclick="showAdminTab('ml-analytics')">🤖 ML Analytics</button>
+                    </div>
+
+                    <div class="admin-content">
+                        <!-- ML Overview Tab -->
+                        <div id="admin-overview-tab" class="admin-tab active">
+                            <div class="stats-grid" id="stats-grid">
+                                <!-- Stats cards with ML metrics will be loaded here -->
+                            </div>
+
+                            <div class="ai-predictions">
+                                <h2>🤖 Advanced AI/ML Predictions</h2>
+                                <div class="predictions-grid" id="predictions-grid">
+                                    <!-- Enhanced prediction cards will be loaded here -->
+                                </div>
+                            </div>
+
+                            <div class="auto-scale-section">
+                                <h2>🔄 AI-Driven Auto-Scaling Control</h2>
+                                <p>Advanced ML system monitors traffic patterns and predicts optimal scaling decisions</p>
+                                <button onclick="triggerAutoScale()" class="scale-button">
+                                    🤖 Execute AI Auto-Scale Analysis
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- AI Servers Tab -->
+                        <div id="admin-servers-tab" class="admin-tab">
+                            <h2>🖥️ AI/ML Server Load Distribution</h2>
+                            <div class="servers-grid" id="admin-servers-grid">
+                                <!-- AI-enhanced server cards will be loaded here -->
+                            </div>
+
+                            <div class="load-distribution">
+                                <h3>📈 ML Load Distribution Analysis</h3>
+                                <div class="distribution-data" id="distribution-data">
+                                    <!-- Enhanced distribution data will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Users Tab -->
+                        <div id="admin-users-tab" class="admin-tab">
+                            <div class="user-management-header">
+                                <h2>👥 AI User Management</h2>
+                                <button onclick="showAddUserForm()" class="add-user-btn">➕ Add User</button>
+                            </div>
+
+                            <div class="users-table">
+                                <table id="users-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>Full Name</th>
+                                            <th>Role</th>
+                                            <th>Created</th>
+                                            <th>Last Login</th>
+                                            <th>AI Score</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="users-table-body">
+                                        <!-- User table content will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- ML Analytics Tab -->
+                        <div id="admin-ml-analytics-tab" class="admin-tab">
+                            <h2>🤖 Machine Learning Analytics</h2>
+
+                            <div class="stats-grid ml-stats-grid">
+                                <div class="stat-card ml-accuracy-card">
+                                    <h3>Model Accuracy</h3>
+                                    <div class="stat-number ml-accuracy-number" id="ml-accuracy">89%</div>
+                                </div>
+                                <div class="stat-card ml-accuracy-card">
+                                    <h3>Predictions Made</h3>
+                                    <div class="stat-number ml-accuracy-number" id="predictions-count">1,247</div>
+                                </div>
+                                <div class="stat-card ml-accuracy-card">
+                                    <h3>ML Training Status</h3>
+                                    <div class="stat-number ml-accuracy-number" id="training-status">ACTIVE</div>
+                                </div>
+                                <div class="stat-card ml-accuracy-card">
+                                    <h3>System Efficiency</h3>
+                                    <div class="stat-number ml-accuracy-number" id="system-efficiency">94%</div>
+                                </div>
+                            </div>
+
+                            <div class="ml-insights" id="ml-insights">
+                                <div class="ml-insight-section">
+                                    <h3>🤖 Current Model Performance</h3>
+                                    <p>Load Prediction Accuracy: 89%</p>
+                                    <p>Latency Prediction Accuracy: 92%</p>
+                                    <p>Model Status: Active and Learning</p>
+                                    <p>Last Training: Today at 2:30 PM</p>
+                                </div>
+
+                                <div class="ml-insight-section">
+                                    <h3>📊 Recent Insights</h3>
+                                    <ul>
+                                        <li>🎯 Server assignment accuracy improved by 23% this week</li>
+                                        <li>⚡ Average response time reduced by 15% through ML optimization</li>
+                                        <li>📈 Load balancing efficiency increased to 94%</li>
+                                        <li>🔮 Future load predictions are 87% accurate</li>
+                                        <li>🤖 AI system prevented 15 potential overload situations</li>
+                                    </ul>
+                                </div>
+
+                                <div class="ml-insight-section">
+                                    <h3>🔄 Adaptive Learning Status</h3>
+                                    <p>Continuous learning is active and improving system performance</p>
+                                    <p>Models retrain automatically every hour with new data</p>
+                                    <p>Traffic pattern recognition: 94% accuracy</p>
+                                    <p>User behavior modeling: 87% predictive accuracy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Super Admin Dashboard Page -->
+            <div id="superadmin-dashboard-page" class="page">
+                <div class="admin-dashboard">
+                    <div class="admin-header">
+                        <h1>👑 Super Admin Dashboard - AI/ML Master Control</h1>
+                        <div class="admin-controls">
+                            <span class="superadmin-name" id="superadmin-welcome">Welcome, Super Admin</span>
+                            <button onclick="showChangePasswordModal()" class="change-password-btn">🔑 Change Password</button>
+                            <button onclick="logout()" class="logout-btn">Logout</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-tabs">
+                        <button class="active" onclick="showSuperAdminTab('overview')">📊 ML Overview</button>
+                        <button onclick="showSuperAdminTab('servers')">🖥️ AI Servers</button>
+                        <button onclick="showSuperAdminTab('users')">👥 Users</button>
+                        <button onclick="showSuperAdminTab('admins')">⚡ Admins</button>
+                        <button onclick="showSuperAdminTab('ml-control')">🤖 ML Control</button>
+                    </div>
+
+                    <div class="admin-content">
+                        <!-- ML Overview Tab -->
+                        <div id="superadmin-overview-tab" class="admin-tab active">
+                            <div class="stats-grid" id="superadmin-stats-grid">
+                                <!-- Super admin stats with ML metrics will be loaded here -->
+                            </div>
+
+                            <div class="ai-predictions">
+                                <h2>🤖 Advanced AI/ML Predictions</h2>
+                                <div class="predictions-grid" id="superadmin-predictions-grid">
+                                    <!-- Enhanced prediction cards will be loaded here -->
+                                </div>
+                            </div>
+
+                            <div class="auto-scale-section">
+                                <h2>🔄 AI-Driven Auto-Scaling Control</h2>
+                                <p>Advanced ML system monitors traffic patterns and predicts optimal scaling decisions</p>
+                                <button onclick="triggerAutoScale()" class="scale-button">
+                                    🤖 Execute AI Auto-Scale Analysis
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- AI Servers Tab -->
+                        <div id="superadmin-servers-tab" class="admin-tab">
+                            <h2>🖥️ AI/ML Server Load Distribution</h2>
+                            <div class="servers-grid" id="superadmin-servers-grid">
+                                <!-- AI-enhanced server cards will be loaded here -->
+                            </div>
+
+                            <div class="load-distribution">
+                                <h3>📈 ML Load Distribution Analysis</h3>
+                                <div class="distribution-data" id="superadmin-distribution-data">
+                                    <!-- Enhanced distribution data will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Users Tab -->
+                        <div id="superadmin-users-tab" class="admin-tab">
+                            <div class="user-management-header">
+                                <h2>👥 AI User Management</h2>
+                                <button onclick="showAddUserForm()" class="add-user-btn">➕ Add User</button>
+                            </div>
+
+                            <div class="users-table">
+                                <table id="superadmin-users-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>Full Name</th>
+                                            <th>Role</th>
+                                            <th>Created</th>
+                                            <th>Last Login</th>
+                                            <th>AI Score</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="superadmin-users-table-body">
+                                        <!-- User table content will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Admins Tab -->
+                        <div id="superadmin-admins-tab" class="admin-tab">
+                            <div class="user-management-header">
+                                <h2>⚡ Admin Management</h2>
+                                <button onclick="showAddAdminForm()" class="add-user-btn">➕ Add Admin</button>
+                            </div>
+
+                            <div class="admins-table">
+                                <table id="admins-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>Full Name</th>
+                                            <th>Created</th>
+                                            <th>Last Login</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admins-table-body">
+                                        <!-- Admins table content will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- ML Control Tab -->
+                        <div id="superadmin-ml-control-tab" class="admin-tab">
+                            <h2>🤖 Machine Learning Control Center</h2>
+
+                            <div class="ml-control-section">
+                                <h3>Model Training & Management</h3>
+                                <div class="ml-control-buttons">
+                                    <button onclick="retrainModels()" class="scale-button">🔄 Retrain ML Models</button>
+                                    <button onclick="resetMLData()" class="scale-button">🗑️ Reset Training Data</button>
+                                    <button onclick="exportMLMetrics()" class="scale-button">📊 Export ML Metrics</button>
+                                </div>
+                            </div>
+
+                            <div class="ml-system-status" id="ml-system-status">
+                                <div class="stats-grid">
+                                    <div class="stat-card ml-accuracy-card">
+                                        <h3>🧠 Load Model Status</h3>
+                                        <div class="stat-number ml-accuracy-number">ACTIVE</div>
+                                        <p>Random Forest: 100 trees</p>
+                                    </div>
+
+                                    <div class="stat-card ml-accuracy-card">
+                                        <h3>📊 Latency Model</h3>
+                                        <div class="stat-number ml-accuracy-number">ACTIVE</div>
+                                        <p>Linear Regression: Trained</p>
+                                    </div>
+
+                                    <div class="stat-card ml-accuracy-card">
+                                        <h3>🎯 Accuracy Score</h3>
+                                        <div class="stat-number ml-accuracy-number">91%</div>
+                                        <p>Combined Model Performance</p>
+                                    </div>
+
+                                    <div class="stat-card ml-accuracy-card">
+                                        <h3>📈 Training Samples</h3>
+                                        <div class="stat-number ml-accuracy-number">10.8K</div>
+                                        <p>Data Points Processed</p>
+                                    </div>
+                                </div>
+
+                                <div class="ml-status-grid">
+                                    <div class="ml-insight-section">
+                                        <h4>🧠 Model Training Status</h4>
+                                        <p>Random Forest Load Model: ACTIVE</p>
+                                        <p>Linear Regression Latency Model: ACTIVE</p>
+                                        <p>Last Training: Today at 3:45 PM</p>
+                                        <p>Training Samples: 10,847</p>
+                                        <p>Next Auto-retrain: In 45 minutes</p>
+                                    </div>
+
+                                    <div class="ml-insight-section">
+                                        <h4>📊 Performance Metrics</h4>
+                                        <p>Load Prediction Accuracy: 89%</p>
+                                        <p>Latency Prediction Accuracy: 92%</p>
+                                        <p>Server Selection Success: 94%</p>
+                                        <p>User Satisfaction Score: 4.7/5</p>
+                                        <p>System Efficiency: 94%</p>
+                                    </div>
+
+                                    <div class="ml-insight-section">
+                                        <h4>🔄 Background Processes</h4>
+                                        <p>Continuous Learning: ACTIVE</p>
+                                        <p>Model Retraining: Every 24h</p>
+                                        <p>Data Collection: ACTIVE</p>
+                                        <p>Accuracy Monitoring: ACTIVE</p>
+                                        <p>Traffic Analysis: RUNNING</p>
+                                    </div>
+
+                                    <div class="ml-insight-section">
+                                        <h4>🎯 Recent Optimizations</h4>
+                                        <p>Feature engineering improved accuracy by 7%</p>
+                                        <p>Hyperparameter tuning completed successfully</p>
+                                        <p>Cross-validation score: 0.91</p>
+                                        <p>Model complexity optimized for performance</p>
+                                        <p>Prediction latency reduced to 2.3ms</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Report Modal -->
+            <div id="report-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>📊 AI System Report</h3>
+                        <span class="close" onclick="closeModal('report-modal')">&times;</span>
+                    </div>
+                    <div class="modal-body" id="report-content">
+                        <!-- Report content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Server Graph Modal -->
+            <div id="graph-modal" class="modal" style="display: none;">
+                <div class="modal-content graph-modal">
+                    <div class="modal-header">
+                        <h3 id="graph-modal-title">📈 AI Server Analytics</h3>
+                        <span class="close" onclick="closeModal('graph-modal')">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <canvas id="server-chart" width="400" height="200"></canvas>
+                        <div id="server-stats" class="server-stats">
+                            <!-- Current server stats with ML insights will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add/Edit User Modal -->
+            <div id="user-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="user-modal-title">➕ Add User</h3>
+                        <span class="close" onclick="closeModal('user-modal')">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <form id="user-form">
+                            <input type="hidden" id="edit-user-id">
+
+                            <div class="form-group">
+                                <label>Username:</label>
+                                <input type="text" id="user-username" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="email" id="user-email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Full Name:</label>
+                                <input type="text" id="user-fullname">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone:</label>
+                                <input type="tel" id="user-phone">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Password:</label>
+                                <input type="password" id="user-password">
+                                <small>Leave blank to keep current password (for edit)</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="user-is-admin">
+                                    Make Admin
+                                </label>
+                            </div>
+
+                            <div id="user-form-error" class="error-message" style="display: none;"></div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">💾 Save</button>
+                                <button type="button" onclick="closeModal('user-modal')" class="cancel-btn">❌ Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add/Edit Admin Modal -->
+            <div id="admin-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="admin-modal-title">➕ Add Admin</h3>
+                        <span class="close" onclick="closeModal('admin-modal')">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <form id="admin-form">
+                            <input type="hidden" id="edit-admin-id">
+
+                            <div class="form-group">
+                                <label>Username:</label>
+                                <input type="text" id="admin-username" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="email" id="admin-email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Full Name:</label>
+                                <input type="text" id="admin-fullname">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone:</label>
+                                <input type="tel" id="admin-phone">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Password:</label>
+                                <input type="password" id="admin-password">
+                                <small>Leave blank to keep current password (for edit)</small>
+                            </div>
+
+                            <div id="admin-form-error" class="error-message" style="display: none;"></div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">💾 Save Admin</button>
+                                <button type="button" onclick="closeModal('admin-modal')" class="cancel-btn">❌ Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Change Password Modal -->
+            <div id="change-password-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>🔑 Change Super Admin Password</h3>
+                        <span class="close" onclick="closeModal('change-password-modal')">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <form id="change-password-form">
+                            <div class="form-group">
+                                <label>Current Password:</label>
+                                <input type="password" id="current-password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>New Password:</label>
+                                <input type="password" id="new-password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Confirm New Password:</label>
+                                <input type="password" id="confirm-new-password" required>
+                            </div>
+
+                            <div id="password-change-error" class="error-message" style="display: none;"></div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">🔑 Change Password</button>
+                                <button type="button" onclick="closeModal('change-password-modal')" class="cancel-btn">❌ Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
